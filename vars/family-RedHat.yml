@@ -1,7 +1,8 @@
 ---
 
 python_packages:
-  - gcc
+  - '@Development Tools'
   - openssl-devel
   - bzip2-devel
   - libffi-devel
+  - xz-devel
