@@ -1,0 +1,36 @@
+---
+
+- name: Test if python {{ python_version_minor }} is installed
+  command: "{{ python_binary }} --version"
+  register: python_bin
+  changed_when: no
+  failed_when: no
+  check_mode: no
+  environment:
+    PATH: /usr/local/bin:{{ ansible_env.PATH }}
+
+- name: Set python version installed
+  set_fact:
+    python_installed: "{{ python_bin.stdout.split(' ')[1] if (python_bin.stdout is defined and python_bin.stdout|length > 0) else 'none' }}"
+
+- block:
+
+    - name: Install all required packages
+      package:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ python_packages }}"
+
+    - name: Download python
+      unarchive:
+        src: "{{ python_url }}"
+        dest: /opt
+        remote_src: true
+
+    - name: Compile python 
+      shell: |
+        cd /opt/Python-{{ python_version }}
+        ./configure --enable-optimizations
+        make altinstall
+
+  when: python_installed == 'none' or python_installed is version(python_version, '<')
