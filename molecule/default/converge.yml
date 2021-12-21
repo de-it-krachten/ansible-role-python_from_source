@@ -2,8 +2,8 @@
 
 - name: Converge
   hosts: all
-  vars: null
+  vars:
   tasks:
-    - name: Include role 'ansible-role-python_from_source'
+    - name: "Include role 'ansible-role-python_from_source'"
       include_role:
-        name: ansible-role-python_from_source
+        name: "ansible-role-python_from_source"
