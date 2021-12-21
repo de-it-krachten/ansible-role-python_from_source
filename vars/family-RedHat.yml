@@ -1,14 +1,8 @@
 ---
 
 python_packages:
-  - build-essential
-  - zlib1g-dev
-  - libncurses5-dev
-  - libgdbm-dev
-  - libnss3-dev
-  - libssl-dev
-  - libsqlite3-dev
-  - libreadline-dev
-  - libffi-dev
-  - curl
-  - libbz2-dev
+  - '@Development Tools'
+  - openssl-devel
+  - bzip2-devel
+  - libffi-devel
+  - xz-devel
