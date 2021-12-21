@@ -26,6 +26,13 @@
   set_fact:
     python_installed: "{{ python_bin.stdout.split(' ')[1] if (python_bin.stdout is defined and python_bin.stdout|length > 0) else 'none' }}"
 
+
+- name: Display python version found
+  debug:
+    msg:
+      - "python {{ python_version_minor }} version installed : {{ python_installed }}"
+      - "python {{ python_version_minor }} version required  : {{ python_version }}"
+
 - block:
 
     - name: Install all required packages
