@@ -47,7 +47,7 @@
         dest: /opt
         remote_src: true
 
-    - name: Compile python 
+    - name: Compile python  # noqa no-changed-when
       shell: |
         cd /opt/Python-{{ python_version }}
         ./configure --enable-optimizations
