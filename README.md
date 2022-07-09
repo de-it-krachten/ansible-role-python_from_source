@@ -5,26 +5,31 @@
 
 Compile python from source
 
-Platforms
---------------
+## Platforms
 
 Supported platforms
 
 - Red Hat Enterprise Linux 7<sup>1</sup>
 - Red Hat Enterprise Linux 8<sup>1</sup>
+- Red Hat Enterprise Linux 9<sup>1</sup>
 - CentOS 7
 - RockyLinux 8
-- AlmaLinux 8<sup>1</sup>
+- OracleLinux 8
+- AlmaLinux 8
+- AlmaLinux 9
 - Debian 10 (Buster)
 - Debian 11 (Bullseye)
 - Ubuntu 18.04 LTS
 - Ubuntu 20.04 LTS
+- Ubuntu 22.04 LTS
+- Fedora 35
+- Fedora 36
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
 
-Role Variables
---------------
+## Role Variables
+### defaults/main.yml
 <pre><code>
 # Python version to compile
 python_version: 3.8.12
@@ -42,10 +47,36 @@ python_binary_full: /usr/local/bin/{{ python_binary }}
 python_url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
 </pre></code>
 
+### vars/family-RedHat.yml
+<pre><code>
+python_packages:
+  - '@Development Tools'
+  - openssl-devel
+  - bzip2-devel
+  - libffi-devel
+  - xz-devel
+</pre></code>
 
-Example Playbook
-----------------
+### vars/family-Debian.yml
+<pre><code>
+python_packages:
+  - build-essential
+  - zlib1g-dev
+  - libncurses5-dev
+  - libgdbm-dev
+  - libnss3-dev
+  - libssl-dev
+  - libsqlite3-dev
+  - libreadline-dev
+  - libffi-dev
+  - curl
+  - libbz2-dev
+</pre></code>
 
+
+
+## Example Playbook
+### molecule/default/converge.yml
 <pre><code>
 - name: sample playbook for role 'python_from_source'
   hosts: all
